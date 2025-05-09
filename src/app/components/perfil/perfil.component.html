@@ -1,0 +1,124 @@
+<!-- Sección Perfil -->
+<div class="container my-5">
+  <div class="row">
+    <!-- Foto y Datos del Usuario -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm border-0" style="background: #fff8f1;">
+        <div class="card-body text-center">
+          <!-- Foto del Usuario (o ícono por defecto) -->
+          <div class="mb-3">
+            <img src="https://via.placeholder.com/150" 
+                 class="rounded-circle border border-4 border-warning" 
+                 alt="Foto de perfil" 
+                 width="150" 
+                 height="150"
+                 style="object-fit: cover;">
+          </div>
+          <h3 class="fw-bold" style="color: #ff5200;">Juan Pérez</h3>
+          <p class="text-muted mb-0">Miembro desde: Enero 2024</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clases Inscritas -->
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white">
+          <h4 class="fw-bold mb-0" style="color: #ff5200;">
+            <i class="fas fa-calendar-check me-2"></i> Mis Clases
+          </h4>
+        </div>
+        <div class="card-body">
+          <!-- Lista de Clases -->
+          <div class="list-group">
+            <!-- Clase 1 -->
+            <div class="list-group-item border-0 mb-2 rounded-3" 
+                 style="background: #fff8f1; transition: all 0.3s;"
+                 onmouseover="this.style.transform='translateX(5px)';"
+                 onmouseout="this.style.transform='translateX(0)';">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="fw-bold mb-1">CrossFit Avanzado</h5>
+                  <p class="mb-1"><i class="far fa-clock me-1"></i> Lunes y Miércoles - 18:00 a 19:30</p>
+                  <p class="mb-0"><i class="fas fa-user-tie me-1"></i> Entrenador: Carlos Rojas</p>
+                </div>
+                <button class="btn btn-outline-danger btn-sm" 
+                        onclick="this.closest('.list-group-item').remove()">
+                  <i class="fas fa-times me-1"></i> Desapuntarse
+                </button>
+              </div>
+            </div>
+
+            <!-- Clase 2 -->
+            <div class="list-group-item border-0 mb-2 rounded-3" 
+                 style="background: #fff8f1; transition: all 0.3s;"
+                 onmouseover="this.style.transform='translateX(5px)';"
+                 onmouseout="this.style.transform='translateX(0)';">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="fw-bold mb-1">Yoga Relax</h5>
+                  <p class="mb-1"><i class="far fa-clock me-1"></i> Martes y Jueves - 09:00 a 10:00</p>
+                  <p class="mb-0"><i class="fas fa-user-tie me-1"></i> Entrenadora: Laura Méndez</p>
+                </div>
+                <button class="btn btn-outline-danger btn-sm" 
+                        onclick="this.closest('.list-group-item').remove()">
+                  <i class="fas fa-times me-1"></i> Desapuntarse
+                </button>
+              </div>
+            </div>
+
+            <!-- Clase 3 -->
+            <div class="list-group-item border-0 mb-2 rounded-3" 
+                 style="background: #fff8f1; transition: all 0.3s;"
+                 onmouseover="this.style.transform='translateX(5px)';"
+                 onmouseout="this.style.transform='translateX(0)';">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="fw-bold mb-1">Boxeo Fitness</h5>
+                  <p class="mb-1"><i class="far fa-clock me-1"></i> Viernes - 17:00 a 18:30</p>
+                  <p class="mb-0"><i class="fas fa-user-tie me-1"></i> Entrenador: Miguel Ángel</p>
+                </div>
+                <button class="btn btn-outline-danger btn-sm" 
+                        onclick="this.closest('.list-group-item').remove()">
+                  <i class="fas fa-times me-1"></i> Desapuntarse
+                </button>
+              </div>
+            </div>
+
+            <!-- Mensaje si no hay clases -->
+            <div id="noClasesMsg" class="text-center py-4" style="display: none;">
+              <i class="fas fa-calendar-times fa-3x mb-3" style="color: #ffaa80;"></i>
+              <h5 class="fw-bold" style="color: #ff5200;">No tienes clases inscritas</h5>
+              <p class="text-muted">¡Apúntate a una clase y comienza tu entrenamiento!</p>
+              <a href="#" class="btn btn-warning">Ver Clases Disponibles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script para manejar desapuntarse de clases -->
+<script>
+  // Función para verificar si no hay clases y mostrar mensaje
+  function checkNoClases() {
+    const clases = document.querySelectorAll('.list-group-item');
+    if (clases.length === 0) {
+      document.getElementById('noClasesMsg').style.display = 'block';
+    }
+  }
+
+  // Asignar evento a los botones de desapuntarse
+  document.querySelectorAll('.btn-outline-danger').forEach(btn => {
+    btn.addEventListener('click', checkNoClases);
+  });
+</script>
+
+<!-- Estilos adicionales -->
+<style>
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white !important;
+  }
+</style>
