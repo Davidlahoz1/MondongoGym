@@ -1,0 +1,274 @@
+<!-- Sección Calendario -->
+<div class="container my-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="fw-bold" style="color: #ff5200;">
+        <i class="far fa-calendar-alt me-2"></i> Mi Calendario de Clases
+      </h2>
+      <p class="text-muted">Visualiza tus clases inscritas por semana.</p>
+    </div>
+  </div>
+
+  <!-- Controles del Calendario -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="d-flex align-items-center">
+        <button class="btn btn-sm me-2" 
+                style="background: #ff5200; color: white;"
+                onclick="previousWeek()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <h4 class="mb-0 fw-bold" id="currentWeek" style="color: #ff5200;">
+          Semana del 5 al 11 de Junio, 2024
+        </h4>
+        <button class="btn btn-sm ms-2" 
+                style="background: #ff5200; color: white;"
+                onclick="nextWeek()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 text-md-end mt-2 mt-md-0">
+      <button class="btn btn-sm me-2" 
+              style="background: #fff8f1; color: #ff5200; border: 1px solid #ff5200;"
+              onclick="goToToday()">
+        <i class="fas fa-calendar-day me-1"></i> Hoy
+      </button>
+    </div>
+  </div>
+
+  <!-- Calendario Semanal -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered mb-0" style="min-height: 400px;">
+          <thead>
+            <tr class="text-center" style="background: #fff8f1;">
+              <th style="width: 12%; color: #ff5200;">Hora</th>
+              <th style="color: #ff5200;">Lunes</th>
+              <th style="color: #ff5200;">Martes</th>
+              <th style="color: #ff5200;">Miércoles</th>
+              <th style="color: #ff5200;">Jueves</th>
+              <th style="color: #ff5200;">Viernes</th>
+              <th style="color: #ff5200;">Sábado</th>
+              <th style="color: #ff5200;">Domingo</th>
+            </tr>
+          </thead>
+          <tbody id="calendarBody">
+            <!-- Horario de 7:00 a 22:00 -->
+            <!-- Las clases se renderizarán dinámicamente aquí -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para detalles de clase -->
+<div class="modal fade" id="classModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #ff5200; color: white;">
+        <h5 class="modal-title fw-bold" id="modalTitle">Detalles de la Clase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Clase:</strong> <span id="modalClassName">CrossFit Avanzado</span></p>
+        <p><strong>Horario:</strong> <span id="modalClassTime">Lunes 18:00 - 19:30</span></p>
+        <p><strong>Sala:</strong> <span id="modalClassRoom">CrossFit 1</span></p>
+        <p><strong>Entrenador:</strong> <span id="modalClassTrainer">Carlos Rojas</span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn text-white" 
+                style="background: #ff5200;"
+                onclick="unregisterClass()">
+          <i class="fas fa-sign-out-alt me-1"></i> Desapuntarse
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script para el calendario dinámico -->
+<script>
+  // Datos de ejemplo (en un caso real vendrían de una API)
+  const userClasses = [
+    {
+      id: 1,
+      name: "CrossFit Avanzado",
+      day: "Lunes",
+      startTime: "18:00",
+      endTime: "19:30",
+      duration: 90,
+      room: "CrossFit 1",
+      trainer: "Carlos Rojas",
+      color: "#ff7b25"
+    },
+    {
+      id: 2,
+      name: "Yoga Relax",
+      day: "Martes",
+      startTime: "09:00",
+      endTime: "10:00",
+      duration: 60,
+      room: "Yoga Studio",
+      trainer: "Laura Méndez",
+      color: "#ff9e40"
+    },
+    {
+      id: 3,
+      name: "Boxeo Fitness",
+      day: "Viernes",
+      startTime: "17:00",
+      endTime: "18:30",
+      duration: 90,
+      room: "Boxeo 2",
+      trainer: "Miguel Ángel",
+      color: "#ff5200"
+    }
+  ];
+
+  // Variables para controlar la semana actual
+  let currentDate = new Date();
+  
+  // Función para renderizar el calendario
+  function renderCalendar() {
+    const calendarBody = document.getElementById('calendarBody');
+    calendarBody.innerHTML = '';
+    
+    // Actualizar el título de la semana
+    const startOfWeek = getStartOfWeek(currentDate);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    
+    document.getElementById('currentWeek').textContent = 
+      `Semana del ${formatDate(startOfWeek)} al ${formatDate(endOfWeek)}, ${startOfWeek.getFullYear()}`;
+    
+    // Generar filas de horas (de 7:00 a 22:00)
+    for (let hour = 7; hour <= 22; hour++) {
+      const row = document.createElement('tr');
+      
+      // Celda de hora
+      const timeCell = document.createElement('td');
+      timeCell.className = 'text-center align-middle';
+      timeCell.style.background = '#fff8f1';
+      timeCell.textContent = `${hour}:00`;
+      row.appendChild(timeCell);
+      
+      // Celdas para cada día
+      for (let day = 0; day < 7; day++) {
+        const dayCell = document.createElement('td');
+        dayCell.style.position = 'relative';
+        dayCell.style.minHeight = '60px';
+        
+        // Verificar si hay una clase en este horario
+        const currentDay = getDayName(day);
+        const currentTime = `${hour}:00`;
+        
+        userClasses.forEach(cls => {
+          if (cls.day === currentDay) {
+            const classStartHour = parseInt(cls.startTime.split(':')[0]);
+            const classEndHour = parseInt(cls.endTime.split(':')[0]);
+            
+            if (hour >= classStartHour && hour < classEndHour) {
+              // Si es la hora de inicio, mostrar el bloque de la clase
+              if (hour === classStartHour) {
+                const classBlock = document.createElement('div');
+                classBlock.className = 'class-event rounded-2 p-2 text-white';
+                classBlock.style.background = cls.color;
+                classBlock.style.position = 'absolute';
+                classBlock.style.top = '0';
+                classBlock.style.left = '5px';
+                classBlock.style.right = '5px';
+                classBlock.style.height = `${(cls.duration / 60) * 60}px`;
+                classBlock.style.zIndex = '1';
+                classBlock.style.cursor = 'pointer';
+                classBlock.innerHTML = `
+                  <strong>${cls.name}</strong>
+                  <div>${cls.startTime} - ${cls.endTime}</div>
+                `;
+                
+                // Añadir evento para mostrar detalles
+                classBlock.addEventListener('click', () => showClassDetails(cls));
+                
+                dayCell.appendChild(classBlock);
+              }
+            }
+          }
+        });
+        
+        row.appendChild(dayCell);
+      }
+      
+      calendarBody.appendChild(row);
+    }
+  }
+
+  // Funciones auxiliares
+  function getStartOfWeek(date) {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Ajuste para que la semana empiece en lunes
+    return new Date(d.setDate(diff));
+  }
+
+  function formatDate(date) {
+    return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+  }
+
+  function getDayName(dayIndex) {
+    const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    return days[dayIndex];
+  }
+
+  function showClassDetails(cls) {
+    document.getElementById('modalClassName').textContent = cls.name;
+    document.getElementById('modalClassTime').textContent = `${cls.day} ${cls.startTime} - ${cls.endTime}`;
+    document.getElementById('modalClassRoom').textContent = cls.room;
+    document.getElementById('modalClassTrainer').textContent = cls.trainer;
+    
+    const modal = new bootstrap.Modal(document.getElementById('classModal'));
+    modal.show();
+  }
+
+  function unregisterClass() {
+    // Aquí iría la lógica para desapuntarse de la clase
+    alert('Funcionalidad de desapuntarse será implementada');
+    const modal = bootstrap.Modal.getInstance(document.getElementById('classModal'));
+    modal.hide();
+  }
+
+  function previousWeek() {
+    currentDate.setDate(currentDate.getDate() - 7);
+    renderCalendar();
+  }
+
+  function nextWeek() {
+    currentDate.setDate(currentDate.getDate() + 7);
+    renderCalendar();
+  }
+
+  function goToToday() {
+    currentDate = new Date();
+    renderCalendar();
+  }
+
+  // Inicializar el calendario
+  document.addEventListener('DOMContentLoaded', renderCalendar);
+</script>
+
+<!-- Estilos adicionales -->
+<style>
+  .class-event {
+    transition: all 0.2s;
+  }
+  .class-event:hover {
+    transform: scale(1.02);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+  .table td {
+    vertical-align: top;
+    position: relative;
+  }
+</style>

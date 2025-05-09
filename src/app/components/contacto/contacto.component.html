@@ -1,0 +1,204 @@
+<!-- Sección Contacto -->
+<div class="container my-5">
+  <div class="row mb-5">
+    <div class="col-12 text-center">
+      <h1 class="fw-bold display-5" style="color: #ff5200;">
+        <i class="fas fa-envelope-open-text me-2"></i> Contáctanos
+      </h1>
+      <p class="lead">¿Tienes dudas? Escríbenos y te responderemos en menos de 24h.</p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Formulario de Contacto -->
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h3 class="fw-bold mb-0" style="color: #ff5200;">
+            <i class="fas fa-paper-plane me-2"></i> Envíanos un mensaje
+          </h3>
+        </div>
+        <div class="card-body">
+          <form id="contactForm">
+            <div class="mb-3">
+              <label for="name" class="form-label fw-bold" style="color: #ff5200;">Nombre completo</label>
+              <input type="text" class="form-control" id="name" placeholder="Ej: Juan Pérez" required
+                     style="border: 2px solid #ffaa80; border-radius: 8px;">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold" style="color: #ff5200;">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" placeholder="Ej: tu@email.com" required
+                     style="border: 2px solid #ffaa80; border-radius: 8px;">
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label fw-bold" style="color: #ff5200;">Asunto</label>
+              <select class="form-select" id="subject" required
+                      style="border: 2px solid #ffaa80; border-radius: 8px;">
+                <option value="" selected disabled>Selecciona un tema</option>
+                <option value="membership">Membresías y precios</option>
+                <option value="classes">Información de clases</option>
+                <option value="trainers">Entrenadores personales</option>
+                <option value="other">Otro</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label fw-bold" style="color: #ff5200;">Mensaje</label>
+              <textarea class="form-control" id="message" rows="5" placeholder="Escribe tu mensaje aquí..." required
+                        style="border: 2px solid #ffaa80; border-radius: 8px;"></textarea>
+            </div>
+            <button type="submit" class="btn w-100 fw-bold text-white py-2" 
+                    style="background: linear-gradient(135deg, #ff7b25, #ff5200); border: none; border-radius: 8px;"
+                    onmouseover="this.style.opacity='0.9';" 
+                    onmouseout="this.style.opacity='1';">
+              <i class="fas fa-paper-plane me-2"></i> Enviar mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información de Contacto -->
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h3 class="fw-bold mb-0" style="color: #ff5200;">
+            <i class="fas fa-map-marker-alt me-2"></i> Visítanos
+          </h3>
+        </div>
+        <div class="card-body">
+          <!-- Mapa (placeholder con imagen estática) -->
+          <div class="ratio ratio-16x9 mb-4 rounded-3 overflow-hidden">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=MondongoGym,Barcelona&zoom=15&size=600x300&maptype=roadmap&markers=color:orange%7CMondongoGym,Barcelona&key=YOUR_API_KEY" 
+                 alt="Ubicación de MondongoGym" class="img-fluid">
+          </div>
+
+          <!-- Información de contacto -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="d-flex align-items-start">
+                <div class="me-3" style="color: #ff5200; font-size: 1.5rem;">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold" style="color: #ff5200;">Horario</h5>
+                  <p class="mb-0">Lunes-Viernes: 6:00 - 22:00</p>
+                  <p class="mb-0">Sábados: 8:00 - 20:00</p>
+                  <p class="mb-0">Domingos: 9:00 - 14:00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="d-flex align-items-start">
+                <div class="me-3" style="color: #ff5200; font-size: 1.5rem;">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold" style="color: #ff5200;">Teléfono</h5>
+                  <p class="mb-0">+34 933 123 456</p>
+                  <p class="mb-0">WhatsApp: +34 600 700 800</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="d-flex align-items-start">
+                <div class="me-3" style="color: #ff5200; font-size: 1.5rem;">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold" style="color: #ff5200;">Email</h5>
+                  <p class="mb-0">infomondongogym.com</p>
+                  <p class="mb-0">soportemondongogym.com</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="d-flex align-items-start">
+                <div class="me-3" style="color: #ff5200; font-size: 1.5rem;">
+                  <i class="fas fa-map-pin"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold" style="color: #ff5200;">Dirección</h5>
+                  <p class="mb-0">Calle Energía, 123</p>
+                  <p class="mb-0">08025 Barcelona</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Redes Sociales -->
+          <div class="mt-4 pt-2">
+            <h5 class="fw-bold mb-3" style="color: #ff5200;">Síguenos</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="social-icon" style="background: #3b5998;">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon" style="background: #1da1f2;">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon" style="background: #e1306c;">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-icon" style="background: #ff0000;">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="#" class="social-icon" style="background: #25d366;">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Estilos adicionales -->
+<style>
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: #ff5200 !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 82, 0, 0.2) !important;
+  }
+</style>
+
+<!-- Script para el formulario -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Simular envío del formulario
+    const btn = this.querySelector('button[type="submit"]');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Enviando...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-check me-2"></i> Mensaje enviado';
+      btn.style.background = '#28a745';
+      
+      // Resetear formulario después de 2 segundos
+      setTimeout(() => {
+        this.reset();
+        btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Enviar mensaje';
+        btn.style.background = 'linear-gradient(135deg, #ff7b25, #ff5200)';
+        btn.disabled = false;
+      }, 2000);
+    }, 1500);
+  });
+</script>
+
+<!-- Incluir Font Awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
