@@ -5,12 +5,17 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ClasesComponent } from './components/clases/clases.component';
 import { HorarioComponent } from './components/horario/horario.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'login',
         pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     },
     {
         path: 'home',

@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { GimnasioService } from '../../service/gym.service';
+import { Component, NgModule } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-    clases: any[] = [];
+   email: string = '';
+  password: string = '';
+  loading: boolean = false;
+  hover: boolean = false;
 
-  constructor(private gimnasioService: GimnasioService) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-    this.gimnasioService.getClases().subscribe({
-      next: data => {
-        this.clases = data;
-      },
-      error: err => {
-        console.error('Error al obtener clases', err);
-      }
-    });
-
-}
+  onSubmit() {
+    this.loading = true;
+    
+    // Simular autenticación
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 1500);
+  }
 }
